@@ -49,7 +49,6 @@ public class Game {
     }
 
     public void addGamePlayer(GamePlayer gamePlayer) {
-
         gamePlayers.add(gamePlayer);
     }
 }

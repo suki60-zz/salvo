@@ -1,7 +1,7 @@
 // $.getJSON("http://localhost:8080/api/games", function(json) {
 //   console.log(json);
 // });
-$.getJSON("http://localhost:8080/api/games", function(data) {})
+$.getJSON("/api/games", function(data) {})
   .done(function(data) {
 
     $(data).each(function(i, game){

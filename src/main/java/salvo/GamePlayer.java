@@ -3,6 +3,8 @@ package salvo;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class GamePlayer {
@@ -21,12 +23,16 @@ public class GamePlayer {
     @JoinColumn(name = "game_id")
     private Game game;
 
+    @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
+    Set<Ship> ships = new HashSet<>();
+
     public GamePlayer() { }
 
     public GamePlayer(Player player, Game game) {
         this.player = player;
         this.game = game;
         this.date = new Date();
+        player.addGamePlayer(this);
         game.addGamePlayer(this);
     }
 
@@ -52,5 +58,14 @@ public class GamePlayer {
 
     public Date getDate() {
         return date;
+    }
+
+    public Set<Ship> getShips() {
+        return ships;
+    }
+
+    public void addShip(Ship ship) {
+//        ship.setGamePlayer(this);
+        ships.add(ship);
     }
 }
