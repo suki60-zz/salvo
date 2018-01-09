@@ -66,11 +66,11 @@ public class SalvoApplication {
 
 			//Ships
 			List<String> l1 = Arrays.asList("A1", "A2", "A3");
-			Ship s1 = new Ship("destroyer", l1);
+			Ship s1 = new Ship("destroyer", l1, gp1);
 			gp1.addShip(s1);
 
 			List<String> l2 = Arrays.asList("B1", "B2", "B3");
-			Ship s2 = new Ship("cruise", l2);
+			Ship s2 = new Ship("cruise", l2, gp2);
 			gp2.addShip(s2);
 
 			shipRepository.save(s1);

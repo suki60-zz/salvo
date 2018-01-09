@@ -37,6 +37,7 @@ public class Player {
         this.userName = userName;
     }
 
+    @JsonIgnore
     public Set<GamePlayer> getGamePlayers() {
         return gamePlayers;
     }
