@@ -22,9 +22,7 @@ public class Game {
         this.date = new Date();
     }
 
-    public long getId() {
-        return id;
-    }
+    public long getId() { return id; }
 
     public Date getDate() {
         return date;

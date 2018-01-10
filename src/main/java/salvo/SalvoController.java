@@ -42,11 +42,11 @@ public class SalvoController {
         mapGamePlayer.put("date", gamePlayer.getGame().getDate());
         mapGamePlayer.put("gamePlayers", gamePlayer.getGame().getGamePlayers()
                 .stream()
-                .map(SalvoController::mapGamePlayer)
+                .map(GameUtil::mapGamePlayer)
                 .collect(Collectors.toList()));
         mapGamePlayer.put("ships", gamePlayer.getShips()
                 .stream()
-                .map(SalvoController::mapShips)
+                .map(GameUtil::mapShips)
                 .collect(Collectors.toList()));
 
 
@@ -63,38 +63,8 @@ public class SalvoController {
         map.put("create", game.getDate());
         map.put("gamePlayers", game.getGamePlayers()
                 .stream()
-                .map(SalvoController::mapGamePlayer)
+                .map(GameUtil::mapGamePlayer)
                 .collect(Collectors.toList()));
-
-        return map;
-    }
-
-    private static Map<String, Object> mapGamePlayer(GamePlayer gamePlayer) {
-
-        Map<String, Object> map = new LinkedHashMap<>();
-
-        map.put("id", gamePlayer.getId());
-        map.put("players", mapPlayer(gamePlayer.getPlayer()));
-
-        return map;
-    }
-
-    private static Map<String, Object> mapPlayer(Player player) {
-
-        Map<String, Object> map = new LinkedHashMap<>();
-
-        map.put("id", player.getId());
-        map.put("email", player.getUserName());
-
-        return map;
-    }
-
-    private static Map<String, Object> mapShips(Ship ship) {
-
-        Map<String, Object> map = new LinkedHashMap<>();
-
-        map.put("type", ship.getType());
-        map.put("location", ship.getLocation());
 
         return map;
     }
