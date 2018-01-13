@@ -1,0 +1,28 @@
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.w-100 {
+  width: 100vw;
+}
+
+.cell {
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#board-table {
+  padding: 0;
+  margin: 0;
+  border-spacing: 0;
+  border: 2px solid black;
+}
