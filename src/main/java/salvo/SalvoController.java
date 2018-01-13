@@ -26,7 +26,7 @@ public class SalvoController {
         return gameRepository
                 .findAll()
                 .stream()
-                .map(SalvoController::mapGame)
+                .map(GameUtil::mapGame)
                 .collect(Collectors.toList());
     }
 
@@ -51,21 +51,5 @@ public class SalvoController {
 
 
         return mapGamePlayer;
-    }
-
-
-    //map functions
-    private static Map<String, Object> mapGame(Game game) {
-
-        Map<String, Object> map = new LinkedHashMap<>();
-
-        map.put("id", game.getId());
-        map.put("create", game.getDate());
-        map.put("gamePlayers", game.getGamePlayers()
-                .stream()
-                .map(GameUtil::mapGamePlayer)
-                .collect(Collectors.toList()));
-
-        return map;
     }
 }
