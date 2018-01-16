@@ -1,6 +1,8 @@
 package salvo;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -15,7 +17,8 @@ public class GameUtil {
         map.put("gamePlayers", game.getGamePlayers()
                 .stream()
                 .map(GameUtil::mapGamePlayer)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())
+        );
 
         return map;
     }
@@ -46,6 +49,26 @@ public class GameUtil {
 
         map.put("type", ship.getType());
         map.put("location", ship.getLocation());
+
+        return map;
+    }
+
+    public static List<Map<String, Object>> mapSalvo1(GamePlayer gamePlayer) {
+
+        return gamePlayer.getSalvos()
+                .stream()
+                .map(GameUtil::mapSalvo2)
+                .collect(Collectors.toList());
+    }
+
+    public static Map<String, Object> mapSalvo2(Salvo salvo) {
+
+        Map<String, Object> map = new LinkedHashMap<>();
+
+        map.put("turn", salvo.getTurn());
+        map.put("player", salvo.getGamePlayer().getPlayer().getId());
+        map.put("gamePlayer", salvo.getGamePlayer().getId());
+        map.put("location",  salvo.getLocations());
 
         return map;
     }

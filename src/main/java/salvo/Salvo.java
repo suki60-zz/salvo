@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Ship {
+public class Salvo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,16 +16,17 @@ public class Ship {
     @JoinColumn(name = "game_player_id")
     private GamePlayer gamePlayer;
 
-    private String type;
+    private int turn;
 
     @ElementCollection
     @Column(name = "locations")
     private List<String> locations;
 
-    public Ship() {}
+    public Salvo() {}
 
-    public Ship(String type, List<String> locations, GamePlayer gamePlayer) {
-        this.type = type;
+    public Salvo(int turn, List<String> locations, GamePlayer gamePlayer) {
+
+        this.turn = turn;
         this.locations = locations;
         this.gamePlayer = gamePlayer;
     }
@@ -35,16 +36,17 @@ public class Ship {
         return id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public List<String> getLocation() {
-        return locations;
-    }
-
     @JsonIgnore
     public GamePlayer getGamePlayer() {
         return gamePlayer;
     }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public List<String> getLocations() {
+        return locations;
+    }
+
 }

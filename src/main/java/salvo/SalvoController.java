@@ -48,7 +48,12 @@ public class SalvoController {
                 .stream()
                 .map(GameUtil::mapShips)
                 .collect(Collectors.toList()));
-
+        mapGamePlayer.put("salvos", gamePlayer.getGame().getGamePlayers()
+                .stream()
+                .map(GameUtil::mapSalvo1)
+                .flatMap(lista -> lista.stream())
+                .collect(Collectors.toList())
+        );
 
         return mapGamePlayer;
     }

@@ -1,17 +1,21 @@
 var query_obj = getQueryObj();
 
-console.log(query_obj.gp);
-
 $.getJSON("/api/game_view/" + query_obj.gp)
   .done(function(game) {
 
     console.log(game);
 
-    $("#player-info-title").text(createPlayerInfo(game));
+    $("#player-info").text(createPlayerInfo(game));
+
+    $("#rival-info").text(createRivalInfo(game));
 
     createBoard();
 
+    createRivalBoard();
+
     createShips(game);
+
+    createPlayerSalvos(game);
   })
   .fail(function(jqXHR, textStatus, errorThrown) {
     console.log("fail");
@@ -33,49 +37,91 @@ function getQueryObj() {
 
 function createPlayerInfo(game) {
 
-  var viewer = "";
-  var opponent = "";
+  var info = "";
   var viewer_id = getQueryObj().gp;
 
   $(game.gamePlayers).each(function(i, gamePlayer) {
 
-    if(gamePlayer.id == viewer_id) {
+    if (gamePlayer.id == viewer_id) {
 
-      viewer = gamePlayer.players.email + "(you)";
-    } else {
-
-      opponent = gamePlayer.players.email;
+      info = gamePlayer.players.email + "(you)";
     }
-  })
+  });
 
-  return viewer + " vs " + opponent;
+  return info;
+}
+
+function createRivalInfo(game) {
+
+  var info = "";
+  var viewer_id = getQueryObj().gp;
+
+  $(game.gamePlayers).each(function(i, gamePlayer) {
+
+    if (gamePlayer.id != viewer_id) {
+
+      info = gamePlayer.players.email;
+    }
+  });
+
+  return info;
 }
 
 function createBoard() {
 
   var letter = ["Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
 
-  for (var i = 0; i < letter.length; i++) {
+  for (var i = 0; i < 11; i++) {
 
     $('<tr/>', {
       id: letter[i],
-    }).appendTo("#board-table");
+    }).appendTo("#player-board");
 
-    for (var j = 0; j < letter.length; j++) {
+    for (var j = 0; j < 11; j++) {
 
       $('<td/>', {
-        id: letter[i] + j,
+        id: letter[j] + i,
         class: "cell",
       }).appendTo("#" + letter[i]);
 
       if ((j == 0) && (i != 0)) {
-        $("#" + letter[i] + j).text(i);
+        $("#" + letter[j] + i).text(i);
       }
       if ((i == 0) && (j != 0)) {
-        $("#" + letter[i] + j).text(letter[j]);
+        $("#" + letter[j] + i).text(letter[j]);
       }
       if (!((i == 0) || (j == 0))) {
-        $("#" + letter[i] + j).attr("bgcolor", "#3498DB");
+        $("#" + letter[j] + i).attr("bgcolor", "#3498DB");
+      }
+    }
+  }
+}
+
+function createRivalBoard() {
+
+  var letter = ["Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+
+  for (var i = 0; i < 11; i++) {
+
+    $('<tr/>', {
+      id: "r-" + letter[i],
+    }).appendTo("#rival-board");
+
+    for (var j = 0; j < 11; j++) {
+
+      $('<td/>', {
+        id: "r-" + letter[j] + i,
+        class: "cell",
+      }).appendTo("#r-" + letter[i]);
+
+      if ((j == 0) && (i != 0)) {
+        $("#r-" + letter[j] + i).text(i);
+      }
+      if ((i == 0) && (j != 0)) {
+        $("#r-" + letter[j] + i).text(letter[j]);
+      }
+      if (!((i == 0) || (j == 0))) {
+        $("#r-" + letter[j] + i).attr("bgcolor", "#3498DB");
       }
     }
   }
@@ -86,8 +132,30 @@ function createShips(game) {
   $(game.ships).each(function(i, ship) {
 
     $(ship.location).each(function(i, cell) {
-
       $("#" + cell).attr("bgcolor", "#707B7C");
+    })
+  })
+}
+
+function createPlayerSalvos(game) {
+
+  $(game.salvos).each(function(i, salvo) {
+
+    $(salvo.location).each(function(i, cell) {
+      if (salvo.gamePlayer == getQueryObj().gp) {
+
+        $("#r-" + cell).attr("bgcolor", "#AED6F1");
+        $("#r-" + cell).text(salvo.turn);
+
+      } else {
+
+        if ($("#" + cell).attr("bgcolor") == "#707B7C") {
+          $("#" + cell).attr("bgcolor", "#E74C3C");
+        } else {
+          $("#" + cell).attr("bgcolor", "#AED6F1");
+        }
+        $("#" + cell).text(salvo.turn);
+      }
     })
   })
 }

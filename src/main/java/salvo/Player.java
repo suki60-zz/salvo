@@ -25,16 +25,13 @@ public class Player {
         this.userName = user_name;
     }
 
+    //getters
     public long getId() {
         return id;
     }
 
     public String getUserName() {
         return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     @JsonIgnore

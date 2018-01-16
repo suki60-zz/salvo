@@ -26,6 +26,9 @@ public class GamePlayer {
     @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
     Set<Ship> ships = new HashSet<>();
 
+    @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
+    Set<Salvo> salvos = new HashSet<>();
+
     public GamePlayer() { }
 
     public GamePlayer(Player player, Game game) {
@@ -36,6 +39,7 @@ public class GamePlayer {
         game.addGamePlayer(this);
     }
 
+    //getters
     public long getId() {
         return id;
     }
@@ -44,16 +48,8 @@ public class GamePlayer {
         return player;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
     public Game getGame() {
         return game;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
     }
 
     public Date getDate() {
@@ -62,6 +58,10 @@ public class GamePlayer {
 
     public Set<Ship> getShips() {
         return ships;
+    }
+
+    public Set<Salvo> getSalvos() {
+        return salvos;
     }
 
     public void addShip(Ship ship) {

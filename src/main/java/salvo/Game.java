@@ -1,6 +1,8 @@
 package salvo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -22,24 +24,22 @@ public class Game {
         this.date = new Date();
     }
 
+    //getters
     public long getId() { return id; }
 
     public Date getDate() {
         return date;
     }
 
-    public void setDate(int num_seconds) {
-
-        Date newDate = Date.from(date.toInstant().plusSeconds(num_seconds));
-        this.date = newDate;
-    }
-
+    @JsonIgnore
     public Set<GamePlayer> getGamePlayers() {
         return gamePlayers;
     }
 
-    public void setGamePlayers(Set<GamePlayer> gamePlayers) {
-        this.gamePlayers = gamePlayers;
+    public void setDate(int num_seconds) {
+
+        Date newDate = Date.from(date.toInstant().plusSeconds(num_seconds));
+        this.date = newDate;
     }
 
     public void showGamePlayers() {
