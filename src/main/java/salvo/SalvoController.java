@@ -5,9 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,13 +19,16 @@ public class SalvoController {
     private GamePlayerRepository gamePlayerRepository;
 
     @RequestMapping("/games")
-    List<Map<String, Object>> getGames() {
+    public List<Map<String, Object>> getGames() {
 
-        return gameRepository
-                .findAll()
+        List<Map<String, Object>> list = new LinkedList<>();
+
+        list = gameRepository.findAll()
                 .stream()
                 .map(GameUtil::mapGame)
                 .collect(Collectors.toList());
+
+        return list;
     }
 
     //GAME VIEWS
@@ -50,7 +51,10 @@ public class SalvoController {
                 .collect(Collectors.toList()));
         mapGamePlayer.put("salvos", gamePlayer.getGame().getGamePlayers()
                 .stream()
-                .map(GameUtil::mapSalvo1)
+                .map(gamePlayer1 -> gamePlayer1.getSalvos()
+                        .stream()
+                        .map(GameUtil::mapSalvo)
+                        .collect(Collectors.toList()))
                 .flatMap(lista -> lista.stream())
                 .collect(Collectors.toList())
         );

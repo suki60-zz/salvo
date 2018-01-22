@@ -17,8 +17,11 @@ public class Game {
 
     private Date date;
 
-    @OneToMany(mappedBy="game", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     Set<GamePlayer> gamePlayers = new HashSet<>();
+
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    Set<Score> scores = new HashSet<>();
 
     public Game() {
         this.date = new Date();
@@ -34,6 +37,11 @@ public class Game {
     @JsonIgnore
     public Set<GamePlayer> getGamePlayers() {
         return gamePlayers;
+    }
+
+    @JsonIgnore
+    public Set<Score> getScores() {
+        return scores;
     }
 
     public void setDate(int num_seconds) {

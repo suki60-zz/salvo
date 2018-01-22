@@ -21,7 +21,8 @@ public class SalvoApplication {
 									  GameRepository gameRepository,
 									  GamePlayerRepository gamePlayerRepository,
 									  ShipRepository shipRepository,
-									  SalvoRepository salvoRepository) {
+									  SalvoRepository salvoRepository,
+									  ScoreRepository scoreRepository) {
 		return (args) -> {
 
 			//Players
@@ -79,7 +80,6 @@ public class SalvoApplication {
 
 
 
-
 			//Salvo
 			List<String> sl1 = Arrays.asList("B1", "A1");
 			Salvo salvo1 = new Salvo(1, sl1, gp1);
@@ -89,6 +89,17 @@ public class SalvoApplication {
 
 			salvoRepository.save(salvo1);
 			salvoRepository.save(salvo2);
+
+
+
+			//Score
+			Score score_1 = new Score(g1, p1, 1.0);
+			Score score_2 = new Score(g1, p2, 0.0);
+
+			scoreRepository.save(score_1);
+			scoreRepository.save(score_2);
+
+
 
 			//Others
 			for (GamePlayer gamePlayer : g1.getGamePlayers()) {
