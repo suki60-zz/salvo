@@ -41,6 +41,11 @@ public class Player {
     public Set<GamePlayer> getGamePlayers() {
         return gamePlayers;
     }
+
+    public Set<Score> getScores() {
+        return scores;
+    }
+
     public Score getScore(Game game) {
 
         return scores.stream()
@@ -48,7 +53,6 @@ public class Player {
                 .findFirst()
                 .orElse(null);
     }
-
 
     public void addGamePlayer(GamePlayer gamePlayer) {
         //gamePlayer.setPlayer(this);

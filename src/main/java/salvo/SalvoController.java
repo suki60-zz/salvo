@@ -18,14 +18,32 @@ public class SalvoController {
     @Autowired
     private GamePlayerRepository gamePlayerRepository;
 
+    @Autowired
+    private PlayerRepository playerRepository;
+
     @RequestMapping("/games")
     public List<Map<String, Object>> getGames() {
 
         List<Map<String, Object>> list = new LinkedList<>();
 
-        list = gameRepository.findAll()
+        list = gameRepository
+                .findAll()
                 .stream()
                 .map(GameUtil::mapGame)
+                .collect(Collectors.toList());
+
+        return list;
+    }
+
+    @RequestMapping("/players")
+    public List<Map<String, Object>> listPlayers() {
+
+        List<Map<String, Object>> list = new LinkedList<>();
+
+        list = playerRepository
+                .findAll()
+                .stream()
+                .map(GameUtil::mapListPlayers)
                 .collect(Collectors.toList());
 
         return list;

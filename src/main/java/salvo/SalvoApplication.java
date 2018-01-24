@@ -28,8 +28,11 @@ public class SalvoApplication {
 			//Players
 			Player p1 = new Player("player1@gmail.com");
 			Player p2 = new Player("player2@gmail.com");
+			Player p3 = new Player("player3@gmail.com");
 			playerRepository.save(p1);
 			playerRepository.save(p2);
+			playerRepository.save(p3);
+
 
 
 
@@ -96,8 +99,19 @@ public class SalvoApplication {
 			Score score_1 = new Score(g1, p1, 1.0);
 			Score score_2 = new Score(g1, p2, 0.0);
 
+			Score score_3 = new Score(g2, p1, 0.0);
+			Score score_4 = new Score(g2, p2, 1.0);
+
+			Score score_5 = new Score(g3, p1, 0.5);
+			Score score_6 = new Score(g3, p2, 0.5);
+
+
 			scoreRepository.save(score_1);
 			scoreRepository.save(score_2);
+			scoreRepository.save(score_3);
+			scoreRepository.save(score_4);
+			scoreRepository.save(score_5);
+			scoreRepository.save(score_6);
 
 
 
