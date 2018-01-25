@@ -74,11 +74,11 @@ public class GameUtil {
         Map<String, Object> map = new LinkedHashMap<>();
         Set<Score> scores = player.getScores();
 
-        map.put("player", player.getUserName());
-        map.put("wins", findWins(scores));
-        map.put("ties", findTies(scores));
-        map.put("loses", findLoses(scores));
-        map.put("total", totalScore(scores));
+        map.put("Wins", findWins(scores));
+        map.put("Username", player.getUserName());
+        map.put("Ties", findTies(scores));
+        map.put("Loses", findLoses(scores));
+        map.put("Total", totalScore(scores));
 
         return map;
     }

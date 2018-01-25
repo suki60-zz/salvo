@@ -34,6 +34,21 @@ h2 {
   padding: 0;
 }
 
+#leader-board-title {
+  padding-bottom: 75px;
+}
+
+#leader-board-table {
+  width: 750px;
+}
+
+.leader-board-cell {
+  width: 150px;
+  text-align: center;
+}
+
+
+
 #player-board,
 #rival-board {
   padding: 0;
